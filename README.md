@@ -2,6 +2,8 @@
 
 Projeto final da disciplina de APIs, FastAPI, Docker e deploy. A aplicação recebe um link público de deck/archetype do MTGGoldfish, lê a lista de cartas, consulta referências de preço na LigaMagic e compara uma estimativa brasileira com uma estimativa simples de importação.
 
+A raiz da aplicação também oferece uma interface web responsiva chamada **DeckValor**. Nela, o usuário informa apenas a URL do deck e o frete estimado. O resultado apresenta a comparação, os totais e uma galeria das cartas com imagens. O Swagger continua disponível em `/docs`.
+
 ## Como funciona
 
 1. O MTGGoldfish fornece nome, formato, decklist e preço paper do deck em dólar.
@@ -47,7 +49,7 @@ python -m pip install -r requirements.txt
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Abra `http://127.0.0.1:8000/docs` para usar o Swagger. Exemplos:
+Abra `http://127.0.0.1:8000/` para usar a interface ou `http://127.0.0.1:8000/docs` para usar o Swagger. Exemplos:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8000/health
@@ -75,7 +77,8 @@ O contêiner usa Python 3.12 slim e inicia o Uvicorn na porta 8000.
 
 ## Endpoints
 
-- `GET /` — informações da API.
+- `GET /` — interface web do DeckValor.
+- `GET /api` — informações da API.
 - `GET /health` — verificação simples de saúde.
 - `GET /analisar-deck` — parâmetros `url`, `frete_usd` e `cotacao_usd_brl`.
 
@@ -85,6 +88,10 @@ O contêiner usa Python 3.12 slim e inicia o Uvicorn na porta 8000.
 app/
   main.py
   models.py
+  static/
+    index.html
+    styles.css
+    app.js
   services/
     mtggoldfish.py
     ligamagic.py

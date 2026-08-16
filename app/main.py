@@ -1,7 +1,10 @@
 import asyncio
+from pathlib import Path
 
 import httpx
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app import __version__
 from app.models import (
@@ -31,13 +34,22 @@ app = FastAPI(
     version=__version__,
 )
 
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-@app.get("/", tags=["Informações"])
+
+@app.get("/", include_in_schema=False)
+async def pagina_inicial() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get("/api", tags=["Informações"])
 async def inicio() -> dict[str, str]:
     return {
         "nome": "API de Preços de Decks MTG",
         "descricao": "Analisa decks do MTGGoldfish e consulta preços públicos da LigaMagic.",
         "versao": __version__,
+        "interface": "/",
         "documentacao": "/docs",
     }
 

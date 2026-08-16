@@ -21,6 +21,7 @@ env/
 *.tmp
 *.temp
 *.html
+!app/static/*.html
 ligamagic_dados.txt
 *.key
 *.key.pub
