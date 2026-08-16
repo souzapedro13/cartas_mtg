@@ -14,7 +14,7 @@ from app.models import (
     ComparacaoResumo,
     DeckResumo,
     ImportacaoResumo,
-    PrecoLigaMagic,
+    PrecoBrasil,
     SubtotalCarta,
 )
 from app.services.calculos import (
@@ -24,13 +24,13 @@ from app.services.calculos import (
     moeda,
 )
 from app.services.cambio import CambioError, obter_cotacao_usd_brl
-from app.services.ligamagic import consultar_carta
 from app.services.mtggoldfish import MTGGoldfishError, USER_AGENT, obter_deck
+from app.services.precos_brasil import consultar_preco_brasil
 
 
 app = FastAPI(
     title="API de Preços de Decks MTG",
-    description="Compara uma estimativa brasileira com a importação de um deck do MTGGoldfish.",
+    description="Compara preços brasileiros com a importação de um deck do MTGGoldfish.",
     version=__version__,
 )
 
@@ -47,7 +47,7 @@ async def pagina_inicial() -> FileResponse:
 async def inicio() -> dict[str, str]:
     return {
         "nome": "API de Preços de Decks MTG",
-        "descricao": "Analisa decks do MTGGoldfish e consulta preços públicos da LigaMagic.",
+        "descricao": "Analisa decks do MTGGoldfish e consulta preços públicos brasileiros.",
         "versao": __version__,
         "interface": "/",
         "documentacao": "/docs",
@@ -83,7 +83,7 @@ async def analisar_deck(
             raise HTTPException(status_code=503, detail=str(exc)) from exc
 
         resultados = await asyncio.gather(
-            *(consultar_carta(carta.nome, client) for carta in deck.cartas)
+            *(consultar_preco_brasil(carta.nome, client) for carta in deck.cartas)
         )
 
     cartas_resposta: list[CartaResposta] = []
@@ -101,18 +101,26 @@ async def analisar_deck(
         preco = subtotal = None
         if resultado.status == "ok":
             assert resultado.preco_minimo is not None
-            assert resultado.preco_medio is not None
-            assert resultado.preco_maximo is not None
-            preco = PrecoLigaMagic(
+            preco = PrecoBrasil(
                 preco_minimo=resultado.preco_minimo,
                 preco_medio=resultado.preco_medio,
                 preco_maximo=resultado.preco_maximo,
                 edicao_referencia=resultado.edicao_referencia,
+                fonte=resultado.fonte,
+                url_fonte=resultado.url_fonte,
             )
             subtotal = SubtotalCarta(
                 minimo=moeda(quantidade * resultado.preco_minimo),
-                medio=moeda(quantidade * resultado.preco_medio),
-                maximo=moeda(quantidade * resultado.preco_maximo),
+                medio=(
+                    moeda(quantidade * resultado.preco_medio)
+                    if resultado.preco_medio is not None
+                    else None
+                ),
+                maximo=(
+                    moeda(quantidade * resultado.preco_maximo)
+                    if resultado.preco_maximo is not None
+                    else None
+                ),
             )
 
         cartas_resposta.append(
@@ -123,7 +131,7 @@ async def analisar_deck(
                 quantidade_sideboard=carta.quantidade_sideboard,
                 quantidade_total=quantidade,
                 imagem=resultado.imagem,
-                ligamagic=preco,
+                preco_brasil=preco,
                 subtotal=subtotal,
                 status=resultado.status,
                 detalhe=resultado.detalhe,
@@ -169,6 +177,7 @@ async def analisar_deck(
         cartas=cartas_resposta,
         avisos=[
             "O valor do MTGGoldfish é uma referência em dólar e não representa necessariamente um carrinho real em uma única loja.",
+            "A LigaMagic é consultada ao vivo; quando a hospedagem é bloqueada, o sistema usa o snapshot LigaMagic preparado para demonstração.",
             "Os totais brasileiros consideram somente as cartas que tiveram cotação válida.",
         ],
     )

@@ -12,17 +12,19 @@ class DeckResumo(BaseModel):
     preco_mtggoldfish_usd: float
 
 
-class PrecoLigaMagic(BaseModel):
+class PrecoBrasil(BaseModel):
     preco_minimo: float
-    preco_medio: float
-    preco_maximo: float
+    preco_medio: float | None = None
+    preco_maximo: float | None = None
     edicao_referencia: str | None = None
+    fonte: str
+    url_fonte: str | None = None
 
 
 class SubtotalCarta(BaseModel):
     minimo: float
-    medio: float
-    maximo: float
+    medio: float | None = None
+    maximo: float | None = None
 
 
 class CartaResposta(BaseModel):
@@ -32,7 +34,7 @@ class CartaResposta(BaseModel):
     quantidade_sideboard: int
     quantidade_total: int
     imagem: str | None = None
-    ligamagic: PrecoLigaMagic | None = None
+    preco_brasil: PrecoBrasil | None = None
     subtotal: SubtotalCarta | None = None
     status: Literal["ok", "sem_cotacao", "erro_consulta"]
     detalhe: str | None = None
@@ -40,8 +42,8 @@ class CartaResposta(BaseModel):
 
 class BrasilResumo(BaseModel):
     total_minimo_brl: float
-    total_medio_brl: float
-    total_maximo_brl: float
+    total_medio_brl: float | None = None
+    total_maximo_brl: float | None = None
     cartas_com_cotacao: int = Field(description="Quantidade de nomes de cartas com cotação.")
     cartas_sem_cotacao: int = Field(description="Quantidade de nomes de cartas sem cotação.")
 

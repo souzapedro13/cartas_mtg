@@ -1,13 +1,13 @@
 # Analisador de preços de decks de Magic
 
-Projeto final da disciplina de APIs, FastAPI, Docker e deploy. A aplicação recebe um link público de deck/archetype do MTGGoldfish, lê a lista de cartas, consulta referências de preço na LigaMagic e compara uma estimativa brasileira com uma estimativa simples de importação.
+Projeto final da disciplina de APIs, FastAPI, Docker e deploy. A aplicação recebe um link público de deck/archetype do MTGGoldfish, lê a lista de cartas, consulta referências brasileiras de preço e compara a compra nacional com uma estimativa simples de importação.
 
 A raiz da aplicação também oferece uma interface web responsiva chamada **DeckValor**. Nela, o usuário informa apenas a URL do deck e o frete estimado. O resultado apresenta a comparação, os totais e uma galeria das cartas com imagens. O Swagger continua disponível em `/docs`.
 
 ## Como funciona
 
 1. O MTGGoldfish fornece nome, formato, decklist e preço paper do deck em dólar.
-2. As cartas distintas são consultadas na página pública da LigaMagic, com no máximo duas requisições simultâneas, intervalo mínimo de um segundo entre chamadas e cache em memória de dez minutos. Respostas `429` acionam espera progressiva e novas tentativas.
+2. As cartas distintas são consultadas na página pública da LigaMagic. As consultas possuem limitação de frequência e cache em memória. Como redes de datacenter podem receber um desafio do Cloudflare, a versão de demonstração também contém um snapshot LigaMagic gerado previamente em uma rede com acesso normal.
 3. A aplicação soma `quantidade × preço` para os cenários mínimo, médio e máximo no Brasil.
 4. A importação soma o preço de referência do deck e o frete (US$ 46,00 por padrão), depois converte o total pela cotação USD/BRL. A AwesomeAPI é a fonte principal e a Frankfurter funciona como alternativa automática se a primeira estiver indisponível ou limitar as requisições.
 
@@ -25,7 +25,13 @@ Na LigaMagic, o projeto interpreta a variável JavaScript `cards_editions`. Os c
 
 Os preços mudam e representam estimativas. Cartas sem cotação não entram nos totais brasileiros; quando isso ocorre, `comparacao.confiavel` é `false` e a resposta explica que a comparação é parcial. Não há otimização por loja, frete nacional, estoque, impostos, IOF, autenticação ou banco de dados.
 
-A LigaMagic pode apresentar um desafio do Cloudflare para endereços de datacenter. Quando nenhuma carta recebe cotação brasileira, a API marca a comparação como `indisponivel` em vez de tratar o total zero como uma opção mais barata. O restante da análise e a estimativa internacional continuam disponíveis.
+A LigaMagic pode apresentar um desafio do Cloudflare para endereços de datacenter. Quando isso ocorre, o sistema evita repetir consultas durante dez minutos e usa o snapshot local, se a carta estiver nele. A interface identifica a fonte como `LigaMagic · snapshot`. Cartas que não estejam no snapshot permanecem sem cotação, sem inventar preços ou usar valores internacionais como se fossem brasileiros.
+
+O snapshot incluído cobre os decks usados nos testes e pode ser atualizado no Windows com acesso normal à LigaMagic:
+
+```powershell
+python scripts/atualizar_snapshot_ligamagic.py "URL_DO_DECK_1" "URL_DO_DECK_2"
+```
 
 O valor do MTGGoldfish é uma referência e não representa necessariamente um carrinho real em uma única loja. A importação é uma estimativa e não inclui tributação, IOF ou outras despesas.
 
@@ -99,6 +105,9 @@ app/
   services/
     mtggoldfish.py
     ligamagic.py
+    precos_brasil.py
+scripts/
+  atualizar_snapshot_ligamagic.py
     cambio.py
     calculos.py
 tests/

@@ -30,6 +30,15 @@ def test_calcular_importacao():
     assert resultado["total_brl"] == 880.85
 
 
+def test_calcular_total_minimo_quando_fonte_nao_informa_media_e_maximo():
+    resultado = calcular_totais_brasil([(4, 7.78, None, None)])
+
+    assert resultado["total_minimo_brl"] == 31.12
+    assert resultado["total_medio_brl"] is None
+    assert resultado["total_maximo_brl"] is None
+    assert resultado["cartas_com_cotacao"] == 1
+
+
 def test_comparar_brasil_e_importacao():
     brasil = comparar_precos(total_importacao_brl=880.85, total_brasil_minimo=500.0)
     importacao = comparar_precos(total_importacao_brl=400.0, total_brasil_minimo=500.0)

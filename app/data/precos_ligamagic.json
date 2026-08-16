@@ -1,0 +1,383 @@
+{
+  "atualizado_em": "2026-08-16T19:37-03:00",
+  "cartas": {
+    "abandon attachments": {
+      "nome_en": "Abandon Attachments",
+      "nome_pt": null,
+      "preco_minimo": 5.71,
+      "preco_medio": 8.95,
+      "preco_maximo": 19.9,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480806/689fb413925cb-36c2z-epivf-5c06e2f9ca969c7fb68b5b4f8f8c7997.jpg",
+      "edicao_referencia": "Avatar: The Last Airbender"
+    },
+    "agony warp": {
+      "nome_en": "Agony Warp",
+      "nome_pt": "Distorção Agonizante",
+      "preco_minimo": 0.29,
+      "preco_medio": 0.63,
+      "preco_maximo": 1.25,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/252/5f42438f67476-v3jdrs-frt6eo-fbd7939d674997cdb4692d34de8633c4.jpg",
+      "edicao_referencia": "Archenemy"
+    },
+    "annul": {
+      "nome_en": "Annul",
+      "nome_pt": "Anular",
+      "preco_minimo": 0.25,
+      "preco_medio": 2.33,
+      "preco_maximo": 5.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480760/68701886e56b0-ak2ud-3hrdy-18c47ba264199a7dd2630cd9a5ca933b.jpg",
+      "edicao_referencia": "Edge of Eternities"
+    },
+    "arms of hadar": {
+      "nome_en": "Arms of Hadar",
+      "nome_pt": "Braços de Hadar",
+      "preco_minimo": 6.99,
+      "preco_medio": 14.3,
+      "preco_maximo": 16.24,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479911/629118115749f-jyc9e-ugb2m-134380822162911811574e5.jpg",
+      "edicao_referencia": "Commander Legends: Batalha por Portal de Baldur"
+    },
+    "blue elemental blast": {
+      "nome_en": "Blue Elemental Blast",
+      "nome_pt": "Explosão Elemental do Azul",
+      "preco_minimo": 9.9,
+      "preco_medio": 17.25,
+      "preco_maximo": 24.79,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/236/5f4243853f93f-y5epc2-h9ekiq-9fb1e8b053128bb4353b5a4ade9d5255.jpg",
+      "edicao_referencia": "Quarta Edição"
+    },
+    "brainstorm": {
+      "nome_en": "Brainstorm",
+      "nome_pt": "Tempestade Cerebral",
+      "preco_minimo": 12.9,
+      "preco_medio": 16.86,
+      "preco_maximo": 19.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/416616/5f424415d8987-vrkbez-szv6d3-d9d4f495e875a2e075a1a4a6e1b9770f.jpg",
+      "edicao_referencia": "Masters 25"
+    },
+    "cast down": {
+      "nome_en": "Cast Down",
+      "nome_pt": "Demover",
+      "preco_minimo": 3.0,
+      "preco_medio": 6.73,
+      "preco_maximo": 9.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/425127/5f42441754160-486bmj-0gmjal-43ec517d68b6edd3015b3edc9a11367b.jpg",
+      "edicao_referencia": "Dominaria"
+    },
+    "contaminated aquifer": {
+      "nome_en": "Contaminated Aquifer",
+      "nome_pt": "Aquífero Contaminado",
+      "preco_minimo": 1.5,
+      "preco_medio": 5.74,
+      "preco_maximo": 9.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479947/6309f946882e9-ikr5n-2pfa1-6573393526309f9468830f.jpg",
+      "edicao_referencia": "Dominária Unida"
+    },
+    "counterspell": {
+      "nome_en": "Counterspell",
+      "nome_pt": "Contramágica",
+      "preco_minimo": 9.5,
+      "preco_medio": 22.24,
+      "preco_maximo": 39.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/313/5f4243b3acaee-zqih2x-fs1x9k-07eb822f067485d7abacc13fc9790289.jpg",
+      "edicao_referencia": "Era Glacial"
+    },
+    "deep analysis": {
+      "nome_en": "Deep Analysis",
+      "nome_pt": "Análise Profunda",
+      "preco_minimo": 0.74,
+      "preco_medio": 0.8,
+      "preco_maximo": 0.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480610/6721752c028d5-u5te9-e091r-e37e6557e459e605f8d4672dda00b16d.jpg",
+      "edicao_referencia": "Foundations Jumpstart 2025"
+    },
+    "end the festivities": {
+      "nome_en": "End the Festivities",
+      "nome_pt": "Encerrar as Festividades",
+      "preco_minimo": 5.88,
+      "preco_medio": 7.95,
+      "preco_maximo": 11.8,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479876/618548a19a0f8-p2gta-mi3yw-1915685115618548a19a140.jpg",
+      "edicao_referencia": "Innistrad: Voto Carmesim"
+    },
+    "extract a confession": {
+      "nome_en": "Extract a Confession",
+      "nome_pt": "Extrair uma Confissão",
+      "preco_minimo": 0.25,
+      "preco_medio": 4.08,
+      "preco_maximo": 6.3,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480392/65a6ec238e8f3-i5tvh-qnvg0-c30f2eb234aa0038a1a2f2d3f9ea5c9c.jpg",
+      "edicao_referencia": "Assassinato na Mansão Karlov"
+    },
+    "faithless looting": {
+      "nome_en": "Faithless Looting",
+      "nome_pt": "Pilhagem Infiel",
+      "preco_minimo": 3.9,
+      "preco_medio": 6.35,
+      "preco_maximo": 7.9,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479948/6303af438b09c-q38ok-10rsj-12908771176303af438b0db.jpg",
+      "edicao_referencia": "Dominária Unida Commander"
+    },
+    "fiery temper": {
+      "nome_en": "Fiery Temper",
+      "nome_pt": "Temperamento Explosivo",
+      "preco_minimo": 0.92,
+      "preco_medio": 3.1,
+      "preco_maximo": 5.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/79577/63067d9401362-1w0c4-aculd-79657800063067d94013b1.jpg",
+      "edicao_referencia": "Sombras em Innistrad"
+    },
+    "fireblast": {
+      "nome_en": "Fireblast",
+      "nome_pt": "Explosão de Fogo",
+      "preco_minimo": 5.3,
+      "preco_medio": 15.86,
+      "preco_maximo": 22.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/43494/5f4243e3db2f1-qxfwt2-9m7hpo-b53b3a3d6ab90ce0268229151c9bde11.jpg",
+      "edicao_referencia": "Duel Decks Anthology: Jace vs. Chandra"
+    },
+    "grab the prize": {
+      "nome_en": "Grab the Prize",
+      "nome_pt": null,
+      "preco_minimo": 1.99,
+      "preco_medio": 9.22,
+      "preco_maximo": 13.28,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480556/66da010b22c65-ixh13-u7jbt-09903de95ca8edf872f080cad8185917.jpg",
+      "edicao_referencia": "Noctumbra: A Casa dos Horrores"
+    },
+    "gurmag angler": {
+      "nome_en": "Gurmag Angler",
+      "nome_pt": "Pescador de Grumag",
+      "preco_minimo": 0.5,
+      "preco_medio": 2.33,
+      "preco_maximo": 4.25,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479741/5f4244297f98d-zx253d-ag9b3h-ec8956637a99787bd197eacd77acce5e.jpg",
+      "edicao_referencia": "Ultimate Masters"
+    },
+    "guttersnipe": {
+      "nome_en": "Guttersnipe",
+      "nome_pt": "Atirador da Sarjeta",
+      "preco_minimo": 1.49,
+      "preco_medio": 1.49,
+      "preco_maximo": 1.49,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480609/67216896d859d-szh2f-uitp9-a47573e568e5a8d320ab76d2ae0188c6.jpg",
+      "edicao_referencia": "Foundations (Starter Collection)"
+    },
+    "highway robbery": {
+      "nome_en": "Highway Robbery",
+      "nome_pt": "Assalto na Estrada",
+      "preco_minimo": 4.9,
+      "preco_medio": 8.73,
+      "preco_maximo": 12.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480447/660b119f18f5c-4t2b9-ia3o1-8b7348065e7b65eeacb807363ff9592c.jpg",
+      "edicao_referencia": "Os Fora da Lei de Encruzilhada do Trovão"
+    },
+    "hydroblast": {
+      "nome_en": "Hydroblast",
+      "nome_pt": "Explosão Hídrica",
+      "preco_minimo": 25.0,
+      "preco_medio": 45.22,
+      "preco_maximo": 53.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/313/5f4243b3ad74a-kn8li3-az8gre-7534f6d4122f4cceabb84c20ae10ee31.jpg",
+      "edicao_referencia": "Era Glacial"
+    },
+    "ice tunnel": {
+      "nome_en": "Ice Tunnel",
+      "nome_pt": "Túnel de Gelo",
+      "preco_minimo": 3.97,
+      "preco_medio": 6.71,
+      "preco_maximo": 8.27,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479834/5ff883dbed657-ah3gp-dwbtu-20056918185ff883dbed6a0.jpg",
+      "edicao_referencia": "Kaldheim"
+    },
+    "kessig flamebreather": {
+      "nome_en": "Kessig Flamebreather",
+      "nome_pt": "Sopra-fogo de Kessig",
+      "preco_minimo": 20.0,
+      "preco_medio": 31.2,
+      "preco_maximo": 34.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479876/6183fad7e6c28-eom6t-kr3bq-21473496556183fad7e6c70.jpg",
+      "edicao_referencia": "Innistrad: Voto Carmesim"
+    },
+    "lava dart": {
+      "nome_en": "Lava Dart",
+      "nome_pt": "Dardo de Lava",
+      "preco_minimo": 6.72,
+      "preco_medio": 8.36,
+      "preco_maximo": 11.06,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479760/5f42442d78e71-ujnfvd-mu53fe-02522a2b2726fb0a03bb19f2d8d9524d.jpg",
+      "edicao_referencia": "Modern Horizons"
+    },
+    "lightning bolt": {
+      "nome_en": "Lightning Bolt",
+      "nome_pt": "Raio",
+      "preco_minimo": 9.95,
+      "preco_medio": 13.26,
+      "preco_maximo": 21.75,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/28182/5f4243e2eb7be-txfjbr-3v7hjq-a0a080f42e6f13b3a2df133f073095dd.jpg",
+      "edicao_referencia": "Modern Masters 2015"
+    },
+    "lorien revealed": {
+      "nome_en": "Lorien Revealed",
+      "nome_pt": "Lórien Revelada",
+      "preco_minimo": 29.99,
+      "preco_medio": 42.85,
+      "preco_maximo": 44.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480196/64838ef89d5f7-xna9r-4bo9d-110061071564838ef89d635.jpg",
+      "edicao_referencia": "O Senhor dos Anéis: Contos da Terra Média"
+    },
+    "mental note": {
+      "nome_en": "Mental Note",
+      "nome_pt": "Nota Mental",
+      "preco_minimo": 54.85,
+      "preco_medio": 84.93,
+      "preco_maximo": 137.9,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/206/5f4243467ddbc-jodzbu-0zhmbw-d9d4f495e875a2e075a1a4a6e1b9770f.jpg",
+      "edicao_referencia": "Julgamento"
+    },
+    "murmuring mystic": {
+      "nome_en": "Murmuring Mystic",
+      "nome_pt": "Místico dos Murmúrios",
+      "preco_minimo": 3.9,
+      "preco_medio": 4.37,
+      "preco_maximo": 6.39,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479796/5f4244419bbcc-i874fo-wl1nxh-5ef059938ba799aaa845e1c2e8a762bd.jpg",
+      "edicao_referencia": "Commander 2020"
+    },
+    "nihil spellbomb": {
+      "nome_en": "Nihil Spellbomb",
+      "nome_pt": "Magibomba Niilista",
+      "preco_minimo": 19.99,
+      "preco_medio": 20.66,
+      "preco_maximo": 24.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/337/631254ea49ced-vqrf3-o9tcr-2134328389631254ea49d39.jpg",
+      "edicao_referencia": "Commander 2013"
+    },
+    "pyroblast": {
+      "nome_en": "Pyroblast",
+      "nome_pt": "Explosão de Chamas",
+      "preco_minimo": 69.9,
+      "preco_medio": 71.09,
+      "preco_maximo": 76.98,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479794/5f4244409c90e-oenb4u-dsv2lp-e4da3b7fbbce2345d7772b0674a318d5.jpg",
+      "edicao_referencia": "Signature Spellbook: Chandra"
+    },
+    "red elemental blast": {
+      "nome_en": "Red Elemental Blast",
+      "nome_pt": "Explosão Elemental do Vermelho",
+      "preco_minimo": 31.95,
+      "preco_medio": 44.65,
+      "preco_maximo": 60.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/236/5f4243851681e-4rwmfa-53ksaz-d3a7319a1a037fc468586594c4c96521.jpg",
+      "edicao_referencia": "Quarta Edição"
+    },
+    "relic of progenitus": {
+      "nome_en": "Relic of Progenitus",
+      "nome_pt": "Relíquia de Progenitus",
+      "preco_minimo": 44.9,
+      "preco_medio": 50.84,
+      "preco_maximo": 56.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/333/6273bf150a2e2-us63b-2aosu-11910574266273bf150a32c.jpg",
+      "edicao_referencia": "Modern Masters"
+    },
+    "searing blaze": {
+      "nome_en": "Searing Blaze",
+      "nome_pt": "Labareda Cauterizante",
+      "preco_minimo": 7.42,
+      "preco_medio": 14.25,
+      "preco_maximo": 22.5,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/180/5f424328f0a4c-qu4ijw-208v5f-8613985ec49eb8f757ae6439e879bb2a.jpg",
+      "edicao_referencia": "Despertar do Mundo"
+    },
+    "smash to smithereens": {
+      "nome_en": "Smash to Smithereens",
+      "nome_pt": "Reduzir a Cacos",
+      "preco_minimo": 1.04,
+      "preco_medio": 2.7,
+      "preco_maximo": 5.99,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/186/5f424339c29c0-3uj9ye-37m9zi-a97da629b098b75c294dffdc3e463904.jpg",
+      "edicao_referencia": "Pântano Sombrio"
+    },
+    "sneaky snacker": {
+      "nome_en": "Sneaky Snacker",
+      "nome_pt": "Beliscadora Furtiva",
+      "preco_minimo": 2.21,
+      "preco_medio": 4.79,
+      "preco_maximo": 9.82,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480445/66578101dee5a-8w9p4-6sk0d-e4c33be81cc6c4dec5a513d10daafc38.jpg",
+      "edicao_referencia": "Modern Horizons 3"
+    },
+    "snuff out": {
+      "nome_en": "Snuff Out",
+      "nome_pt": "Liquidar",
+      "preco_minimo": 48.8,
+      "preco_medio": 61.13,
+      "preco_maximo": 89.9,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480277/6520643f74daf-og89p-nxey2-3694037866520643f74dee.jpg",
+      "edicao_referencia": "Doctor Who"
+    },
+    "spell pierce": {
+      "nome_en": "Spell Pierce",
+      "nome_pt": "Perfurar Mágica",
+      "preco_minimo": 1.03,
+      "preco_medio": 2.35,
+      "preco_maximo": 5.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/181/5f424329a7b1e-ec4dt3-zshirg-735b90b4568125ed6c3f678819b6e058.jpg",
+      "edicao_referencia": "Zendikar"
+    },
+    "steel sabotage": {
+      "nome_en": "Steel Sabotage",
+      "nome_pt": "Sabotagem de Aço",
+      "preco_minimo": 2.1,
+      "preco_medio": 5.84,
+      "preco_maximo": 100.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/177/5f42431c10e7c-yo276w-tqzr9n-182be0c5cdcd5072bb1864cdee4d3d6e.jpg",
+      "edicao_referencia": "Mirrodin Sitiada"
+    },
+    "thorn of the black rose": {
+      "nome_en": "Thorn of the Black Rose",
+      "nome_pt": "Espinho da Rosa Negra",
+      "preco_minimo": 0.7,
+      "preco_medio": 2.57,
+      "preco_maximo": 4.75,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479823/5f984e2ddb2c0-fg0e3-numdr-7808345945f984e2ddb312.jpg",
+      "edicao_referencia": "Commander Legends"
+    },
+    "thought scour": {
+      "nome_en": "Thought Scour",
+      "nome_pt": "Purgar Pensamento",
+      "preco_minimo": 2.0,
+      "preco_medio": 3.87,
+      "preco_maximo": 5.0,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479791/5f42443af388b-6sfjt5-xz071n-53fde96fcc4b4ce72d7739202324cd49.jpg",
+      "edicao_referencia": "Mystery Booster"
+    },
+    "tolarian terror": {
+      "nome_en": "Tolarian Terror",
+      "nome_pt": "Terror Tolariano",
+      "preco_minimo": 0.1,
+      "preco_medio": 3.89,
+      "preco_maximo": 11.2,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/480601/6723c3472d366-ct6d5-qjdb1-f470ea843f79786b646179a35f39cf66.jpg",
+      "edicao_referencia": "Foundations"
+    },
+    "unexpected fangs": {
+      "nome_en": "Unexpected Fangs",
+      "nome_pt": "Presas Inesperadas",
+      "preco_minimo": 1.35,
+      "preco_medio": 4.23,
+      "preco_maximo": 7.5,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479795/5f424440b9e3f-x2bn8t-e8hdgt-ec8956637a99787bd197eacd77acce5e.jpg",
+      "edicao_referencia": "Ikoria: Terra de Colossos"
+    },
+    "voldaren epicure": {
+      "nome_en": "Voldaren Epicure",
+      "nome_pt": "Epicurista Voldaren",
+      "preco_minimo": 2.25,
+      "preco_medio": 3.54,
+      "preco_maximo": 7.65,
+      "imagem": "https://repositorio.sbrauble.com/arquivos/in/magic/479876/6185492e4afee-mxng7-xk0ya-8400488156185492e4b04b.jpg",
+      "edicao_referencia": "Innistrad: Voto Carmesim"
+    }
+  }
+}

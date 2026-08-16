@@ -17,11 +17,17 @@ SCRYFALL_URL = "https://api.scryfall.com/cards/named"
 CACHE_TTL_SEGUNDOS = 10 * 60
 INTERVALO_ENTRE_REQUISICOES = 1.0
 MAX_TENTATIVAS_RATE_LIMIT = 3
+BLOQUEIO_TEMPORARIO_SEGUNDOS = 10 * 60
 
 _cache: dict[str, tuple[float, "ResultadoLigaMagic"]] = {}
 _semaforo = asyncio.Semaphore(2)
 _rate_lock = asyncio.Lock()
 _proximo_inicio = 0.0
+_indisponivel_ate = 0.0
+
+
+class LigaMagicTemporariamenteIndisponivel(Exception):
+    pass
 
 
 @dataclass(slots=True)
@@ -246,13 +252,21 @@ async def consultar_carta(
         )
 
     try:
+        global _indisponivel_ate
         assert client is not None
         async with _semaforo:
+            if time.monotonic() < _indisponivel_ate:
+                raise LigaMagicTemporariamenteIndisponivel(
+                    "acesso temporariamente suspenso após bloqueio do servidor"
+                )
             for tentativa in range(MAX_TENTATIVAS_RATE_LIMIT):
                 await _aguardar_janela_de_requisicao()
                 response = await client.get(
                     LIGAMAGIC_URL, params={"card": nome, "view": "cards/card"}
                 )
+                if response.status_code == 403:
+                    _indisponivel_ate = time.monotonic() + BLOQUEIO_TEMPORARIO_SEGUNDOS
+                    response.raise_for_status()
                 if response.status_code != 429:
                     response.raise_for_status()
                     break
@@ -266,7 +280,12 @@ async def consultar_carta(
             else:
                 response.raise_for_status()
         resultado = parse_ligamagic_html(response.text, nome)
-    except (httpx.HTTPError, ValueError, TypeError) as exc:
+    except (
+        httpx.HTTPError,
+        LigaMagicTemporariamenteIndisponivel,
+        ValueError,
+        TypeError,
+    ) as exc:
         resultado = ResultadoLigaMagic(
             nome_en=nome,
             nome_pt=None,

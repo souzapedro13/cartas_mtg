@@ -103,19 +103,19 @@ function createCard(card) {
   const body = createElement("div", "card-body");
   const name = createElement("div", "card-name");
   name.append(createElement("strong", "", card.nome));
-  name.append(createElement("small", "", card.nome_pt || card.ligamagic?.edicao_referencia || "Nome em português indisponível"));
+  name.append(createElement("small", "", card.nome_pt || card.preco_brasil?.edicao_referencia || "Nome em português indisponível"));
   body.append(name);
 
-  if (card.status === "ok" && card.ligamagic && card.subtotal) {
+  if (card.status === "ok" && card.preco_brasil && card.subtotal) {
     const prices = createElement("div", "card-prices");
     [
-      ["Mín.", card.ligamagic.preco_minimo],
-      ["Médio", card.ligamagic.preco_medio],
-      ["Máx.", card.ligamagic.preco_maximo],
+      ["Mín.", card.preco_brasil.preco_minimo],
+      ["Médio", card.preco_brasil.preco_medio],
+      ["Máx.", card.preco_brasil.preco_maximo],
     ].forEach(([label, value]) => {
       const item = document.createElement("div");
       item.append(createElement("span", "", label));
-      item.append(createElement("strong", "", moneyBRL(value)));
+      item.append(createElement("strong", "", value == null ? "—" : moneyBRL(value)));
       prices.append(item);
     });
     body.append(prices);
@@ -124,6 +124,19 @@ function createCard(card) {
     subtotal.append(createElement("span", "", "Subtotal mínimo"));
     subtotal.append(createElement("strong", "", moneyBRL(card.subtotal.minimo)));
     body.append(subtotal);
+
+    const source = createElement("div", "card-source");
+    source.append(createElement("span", "", "Fonte"));
+    if (card.preco_brasil.url_fonte) {
+      const link = createElement("a", "", `${card.preco_brasil.fonte} ↗`);
+      link.href = card.preco_brasil.url_fonte;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      source.append(link);
+    } else {
+      source.append(createElement("strong", "", card.preco_brasil.fonte));
+    }
+    body.append(source);
   } else {
     body.append(createElement("div", "card-unavailable", "Cotação brasileira indisponível"));
   }
@@ -155,8 +168,12 @@ function renderResult(data) {
   document.querySelector("#source-link").href = data.deck.url;
 
   setText("#brazil-min", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_minimo_brl));
-  setText("#brazil-average", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_medio_brl));
-  setText("#brazil-max", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_maximo_brl));
+  const hasAverage = data.brasil.total_medio_brl != null;
+  const hasMaximum = data.brasil.total_maximo_brl != null;
+  setText("#brazil-average", hasAverage ? moneyBRL(data.brasil.total_medio_brl) : "—");
+  setText("#brazil-max", hasMaximum ? moneyBRL(data.brasil.total_maximo_brl) : "—");
+  setText("#brazil-average-note", hasAverage ? `${data.brasil.cartas_com_cotacao} nomes cotados` : "Não informado por todas as fontes");
+  setText("#brazil-max-note", hasMaximum ? "Faixa superior encontrada" : "Não informado por todas as fontes");
   setText("#quoted-cards", `${data.brasil.cartas_com_cotacao} nomes cotados · ${data.brasil.cartas_sem_cotacao} sem cotação`);
   setText("#import-total", moneyBRL(data.importacao.total_brl));
   setText("#import-detail", `${moneyUSD(data.importacao.total_usd)} com frete`);

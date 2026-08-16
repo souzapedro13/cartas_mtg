@@ -7,21 +7,28 @@ def moeda(valor: float) -> float:
 
 def calcular_totais_brasil(
     itens: Iterable[tuple[int, float | None, float | None, float | None]],
-) -> dict[str, float | int]:
+) -> dict[str, float | int | None]:
     minimo = medio = maximo = 0.0
     com_cotacao = sem_cotacao = 0
+    todos_com_media = todos_com_maximo = True
     for quantidade, preco_minimo, preco_medio, preco_maximo in itens:
-        if None in (preco_minimo, preco_medio, preco_maximo):
+        if preco_minimo is None:
             sem_cotacao += 1
             continue
         com_cotacao += 1
         minimo += quantidade * float(preco_minimo)
-        medio += quantidade * float(preco_medio)
-        maximo += quantidade * float(preco_maximo)
+        if preco_medio is None:
+            todos_com_media = False
+        else:
+            medio += quantidade * float(preco_medio)
+        if preco_maximo is None:
+            todos_com_maximo = False
+        else:
+            maximo += quantidade * float(preco_maximo)
     return {
         "total_minimo_brl": moeda(minimo),
-        "total_medio_brl": moeda(medio),
-        "total_maximo_brl": moeda(maximo),
+        "total_medio_brl": moeda(medio) if com_cotacao and todos_com_media else None,
+        "total_maximo_brl": moeda(maximo) if com_cotacao and todos_com_maximo else None,
         "cartas_com_cotacao": com_cotacao,
         "cartas_sem_cotacao": sem_cotacao,
     }
