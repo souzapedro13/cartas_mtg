@@ -57,7 +57,7 @@ class ImportacaoResumo(BaseModel):
 
 
 class ComparacaoResumo(BaseModel):
-    mais_barato: Literal["brasil", "importacao", "empate"]
+    mais_barato: Literal["brasil", "importacao", "empate", "indisponivel"]
     referencia_brasil: str
     diferenca_brl: float
     confiavel: bool

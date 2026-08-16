@@ -38,7 +38,18 @@ def calcular_importacao(deck_usd: float, frete_usd: float, cotacao: float) -> di
     }
 
 
-def comparar_precos(total_importacao_brl: float, total_brasil_minimo: float) -> dict[str, str | float]:
+def comparar_precos(
+    total_importacao_brl: float,
+    total_brasil_minimo: float,
+    possui_cotacao_brasil: bool = True,
+) -> dict[str, str | float]:
+    if not possui_cotacao_brasil:
+        return {
+            "mais_barato": "indisponivel",
+            "referencia_brasil": "sem cotação brasileira disponível",
+            "diferenca_brl": 0.0,
+        }
+
     diferenca = moeda(abs(total_importacao_brl - total_brasil_minimo))
     if total_importacao_brl < total_brasil_minimo:
         mais_barato = "importacao"

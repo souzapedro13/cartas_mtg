@@ -24,6 +24,8 @@ Na LigaMagic, o projeto interpreta a variável JavaScript `cards_editions`. Os c
 
 Os preços mudam e representam estimativas. Cartas sem cotação não entram nos totais brasileiros; quando isso ocorre, `comparacao.confiavel` é `false` e a resposta explica que a comparação é parcial. Não há otimização por loja, frete nacional, estoque, impostos, IOF, autenticação ou banco de dados. O Scryfall não foi necessário nesta versão.
 
+A LigaMagic pode apresentar um desafio do Cloudflare para endereços de datacenter. Quando nenhuma carta recebe cotação brasileira, a API marca a comparação como `indisponivel` em vez de tratar o total zero como uma opção mais barata. O restante da análise e a estimativa internacional continuam disponíveis.
+
 O valor do MTGGoldfish é uma referência e não representa necessariamente um carrinho real em uma única loja. A importação é uma estimativa e não inclui tributação, IOF ou outras despesas.
 
 ## Instalação e execução local

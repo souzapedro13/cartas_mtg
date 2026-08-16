@@ -148,14 +148,15 @@ function renderNotices(notices) {
 
 function renderResult(data) {
   const totalCards = data.deck.main_deck_cartas + data.deck.sideboard_cartas;
+  const brazilUnavailable = data.brasil.cartas_com_cotacao === 0;
   setText("#deck-name", data.deck.nome || "Deck sem nome");
   setText("#deck-format", data.deck.formato || "Formato não informado");
   setText("#deck-count", `${totalCards} cartas · ${data.deck.main_deck_cartas} main / ${data.deck.sideboard_cartas} side`);
   document.querySelector("#source-link").href = data.deck.url;
 
-  setText("#brazil-min", moneyBRL(data.brasil.total_minimo_brl));
-  setText("#brazil-average", moneyBRL(data.brasil.total_medio_brl));
-  setText("#brazil-max", moneyBRL(data.brasil.total_maximo_brl));
+  setText("#brazil-min", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_minimo_brl));
+  setText("#brazil-average", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_medio_brl));
+  setText("#brazil-max", brazilUnavailable ? "—" : moneyBRL(data.brasil.total_maximo_brl));
   setText("#quoted-cards", `${data.brasil.cartas_com_cotacao} nomes cotados · ${data.brasil.cartas_sem_cotacao} sem cotação`);
   setText("#import-total", moneyBRL(data.importacao.total_brl));
   setText("#import-detail", `${moneyUSD(data.importacao.total_usd)} com frete`);
@@ -167,26 +168,27 @@ function renderResult(data) {
   const verdictCard = document.querySelector("#verdict-card");
   verdictCard.classList.remove("is-import", "is-partial");
   const cheaper = data.comparacao.mais_barato;
+  const unavailable = cheaper === "indisponivel";
   const isImport = cheaper === "importacao";
   const isTie = cheaper === "empate";
   if (isImport) verdictCard.classList.add("is-import");
   if (!data.comparacao.confiavel) verdictCard.classList.add("is-partial");
 
-  setText("#verdict-kicker", isTie ? "Estimativas equivalentes" : "Melhor estimativa");
-  setText("#verdict-title", isTie ? "Valores praticamente iguais" : isImport ? "Importar ficou mais barato" : "Comprar no Brasil ficou mais barato");
+  setText("#verdict-kicker", unavailable ? "Comparação parcial" : isTie ? "Estimativas equivalentes" : "Melhor estimativa");
+  setText("#verdict-title", unavailable ? "Cotação brasileira indisponível" : isTie ? "Valores praticamente iguais" : isImport ? "Importar ficou mais barato" : "Comprar no Brasil ficou mais barato");
   setText("#verdict-description", data.comparacao.observacao || (isTie
     ? "A diferença entre as duas estimativas é mínima."
     : isImport
       ? "A estimativa internacional, com o frete informado, apresentou o menor valor."
       : "O menor preço brasileiro encontrado apresentou o menor valor total."));
-  setText("#verdict-difference", moneyBRL(data.comparacao.diferenca_brl));
+  setText("#verdict-difference", unavailable ? "—" : moneyBRL(data.comparacao.diferenca_brl));
 
   const brazilValue = Number(data.brasil.total_minimo_brl || 0);
   const importValue = Number(data.importacao.total_brl || 0);
   const scale = Math.max(brazilValue, importValue, 1);
-  document.querySelector("#bar-brazil").style.width = `${Math.max(4, (brazilValue / scale) * 100)}%`;
+  document.querySelector("#bar-brazil").style.width = brazilUnavailable ? "0%" : `${Math.max(4, (brazilValue / scale) * 100)}%`;
   document.querySelector("#bar-import").style.width = `${Math.max(4, (importValue / scale) * 100)}%`;
-  setText("#bar-brazil-value", moneyBRL(brazilValue));
+  setText("#bar-brazil-value", brazilUnavailable ? "Sem cotação" : moneyBRL(brazilValue));
   setText("#bar-import-value", moneyBRL(importValue));
   setText("#comparison-note", data.comparacao.confiavel
     ? "Comparação baseada no menor preço brasileiro válido para cada carta."

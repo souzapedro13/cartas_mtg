@@ -133,7 +133,9 @@ async def analisar_deck(
     brasil_dados = calcular_totais_brasil(itens_totais)
     importacao_dados = calcular_importacao(deck.preco_usd, frete_usd, cotacao)
     comparacao_dados = comparar_precos(
-        float(importacao_dados["total_brl"]), float(brasil_dados["total_minimo_brl"])
+        float(importacao_dados["total_brl"]),
+        float(brasil_dados["total_minimo_brl"]),
+        possui_cotacao_brasil=int(brasil_dados["cartas_com_cotacao"]) > 0,
     )
 
     return AnaliseDeckResposta(
@@ -155,9 +157,13 @@ async def analisar_deck(
             **comparacao_dados,
             confiavel=int(brasil_dados["cartas_sem_cotacao"]) == 0,
             observacao=(
-                None
-                if int(brasil_dados["cartas_sem_cotacao"]) == 0
-                else "Comparação parcial: há cartas sem cotação que não entraram no total brasileiro."
+                "Comparação indisponível: nenhuma carta recebeu cotação brasileira."
+                if int(brasil_dados["cartas_com_cotacao"]) == 0
+                else (
+                    None
+                    if int(brasil_dados["cartas_sem_cotacao"]) == 0
+                    else "Comparação parcial: há cartas sem cotação que não entraram no total brasileiro."
+                )
             ),
         ),
         cartas=cartas_resposta,

@@ -38,3 +38,14 @@ def test_comparar_brasil_e_importacao():
     assert brasil["diferenca_brl"] == 380.85
     assert importacao["mais_barato"] == "importacao"
     assert importacao["diferenca_brl"] == 100.0
+
+
+def test_comparacao_indisponivel_sem_cotacao_brasileira():
+    resultado = comparar_precos(
+        total_importacao_brl=880.85,
+        total_brasil_minimo=0.0,
+        possui_cotacao_brasil=False,
+    )
+
+    assert resultado["mais_barato"] == "indisponivel"
+    assert resultado["diferenca_brl"] == 0.0
