@@ -3,7 +3,8 @@ import httpx
 from app.services.mtggoldfish import USER_AGENT
 
 
-CAMBIO_URL = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+AWESOMEAPI_URL = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+FRANKFURTER_URL = "https://api.frankfurter.dev/v2/rate/USD/BRL"
 
 
 class CambioError(RuntimeError):
@@ -23,16 +24,26 @@ async def obter_cotacao_usd_brl(
         client = httpx.AsyncClient(headers={"User-Agent": USER_AGENT}, timeout=10.0)
     try:
         assert client is not None
-        response = await client.get(CAMBIO_URL)
-        response.raise_for_status()
-        cotacao = float(response.json()["USDBRL"]["bid"])
-        if cotacao <= 0:
-            raise ValueError("cotação inválida")
-        return cotacao, "AwesomeAPI (USD/BRL bid)"
-    except (httpx.HTTPError, KeyError, TypeError, ValueError) as exc:
+        fontes = (
+            (AWESOMEAPI_URL, lambda dados: dados["USDBRL"]["bid"], "AwesomeAPI (USD/BRL bid)"),
+            (FRANKFURTER_URL, lambda dados: dados["rate"], "Frankfurter (USD/BRL)"),
+        )
+        ultimo_erro: Exception | None = None
+        for url, extrair, nome_fonte in fontes:
+            try:
+                response = await client.get(url)
+                response.raise_for_status()
+                cotacao = float(extrair(response.json()))
+                if cotacao <= 0:
+                    raise ValueError("cotação inválida")
+                return cotacao, nome_fonte
+            except (httpx.HTTPError, KeyError, TypeError, ValueError) as exc:
+                ultimo_erro = exc
+
         raise CambioError(
-            "Não foi possível obter a cotação USD/BRL. Informe cotacao_usd_brl manualmente."
-        ) from exc
+            "Não foi possível obter a cotação USD/BRL nas fontes automáticas. "
+            "Informe cotacao_usd_brl manualmente."
+        ) from ultimo_erro
     finally:
         if owns_client:
             await client.aclose()

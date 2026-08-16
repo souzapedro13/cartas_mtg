@@ -9,7 +9,7 @@ A raiz da aplicação também oferece uma interface web responsiva chamada **Dec
 1. O MTGGoldfish fornece nome, formato, decklist e preço paper do deck em dólar.
 2. As cartas distintas são consultadas na página pública da LigaMagic, com no máximo duas requisições simultâneas, intervalo mínimo de um segundo entre chamadas e cache em memória de dez minutos. Respostas `429` acionam espera progressiva e novas tentativas.
 3. A aplicação soma `quantidade × preço` para os cenários mínimo, médio e máximo no Brasil.
-4. A importação soma o preço de referência do deck e o frete (US$ 46,00 por padrão), depois converte o total pela cotação USD/BRL.
+4. A importação soma o preço de referência do deck e o frete (US$ 46,00 por padrão), depois converte o total pela cotação USD/BRL. A AwesomeAPI é a fonte principal e a Frankfurter funciona como alternativa automática se a primeira estiver indisponível ou limitar as requisições.
 
 O parser do MTGGoldfish prioriza o campo textual `deck_input[deck]` presente no HTML, que contém a separação `sideboard`. Assim, não depende das tabelas que a página carrega depois com JavaScript.
 
@@ -19,7 +19,8 @@ Na LigaMagic, o projeto interpreta a variável JavaScript `cards_editions`. Os c
 
 - **MTGGoldfish:** decklist e preço paper de referência em dólar.
 - **LigaMagic:** nomes, imagem e preços brasileiros obtidos de páginas públicas. Não é usada uma integração oficial e mudanças no HTML podem exigir ajuste do parser.
-- **AwesomeAPI:** cotação pública USD/BRL (`bid`), sem chave. Uma cotação manual pode ser enviada se o serviço estiver indisponível.
+- **AwesomeAPI:** fonte principal da cotação pública USD/BRL (`bid`), sem chave.
+- **Frankfurter:** segunda fonte pública sem chave, usada automaticamente quando a AwesomeAPI não responde. Uma cotação manual ainda pode ser enviada se ambas estiverem indisponíveis.
 
 Os preços mudam e representam estimativas. Cartas sem cotação não entram nos totais brasileiros; quando isso ocorre, `comparacao.confiavel` é `false` e a resposta explica que a comparação é parcial. Não há otimização por loja, frete nacional, estoque, impostos, IOF, autenticação ou banco de dados. O Scryfall não foi necessário nesta versão.
 

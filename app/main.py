@@ -64,7 +64,9 @@ async def analisar_deck(
     url: str = Query(..., description="URL pública de deck/archetype do MTGGoldfish"),
     frete_usd: float = Query(46.0, ge=0, description="Frete estimado em dólares"),
     cotacao_usd_brl: float | None = Query(
-        None, gt=0, description="Cotação manual opcional; se omitida, consulta a AwesomeAPI"
+        None,
+        gt=0,
+        description="Cotação manual opcional; se omitida, consulta AwesomeAPI e Frankfurter",
     ),
 ) -> AnaliseDeckResposta:
     timeout = httpx.Timeout(20.0)
