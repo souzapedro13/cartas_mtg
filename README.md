@@ -21,8 +21,9 @@ Na LigaMagic, o projeto interpreta a variável JavaScript `cards_editions`. Os c
 - **LigaMagic:** nomes, imagem e preços brasileiros obtidos de páginas públicas. Não é usada uma integração oficial e mudanças no HTML podem exigir ajuste do parser.
 - **AwesomeAPI:** fonte principal da cotação pública USD/BRL (`bid`), sem chave.
 - **Frankfurter:** segunda fonte pública sem chave, usada automaticamente quando a AwesomeAPI não responde. Uma cotação manual ainda pode ser enviada se ambas estiverem indisponíveis.
+- **Scryfall:** fallback somente para a imagem e a identificação da carta quando a LigaMagic não fornece esses dados. Os preços brasileiros nunca são substituídos por preços do Scryfall.
 
-Os preços mudam e representam estimativas. Cartas sem cotação não entram nos totais brasileiros; quando isso ocorre, `comparacao.confiavel` é `false` e a resposta explica que a comparação é parcial. Não há otimização por loja, frete nacional, estoque, impostos, IOF, autenticação ou banco de dados. O Scryfall não foi necessário nesta versão.
+Os preços mudam e representam estimativas. Cartas sem cotação não entram nos totais brasileiros; quando isso ocorre, `comparacao.confiavel` é `false` e a resposta explica que a comparação é parcial. Não há otimização por loja, frete nacional, estoque, impostos, IOF, autenticação ou banco de dados.
 
 A LigaMagic pode apresentar um desafio do Cloudflare para endereços de datacenter. Quando nenhuma carta recebe cotação brasileira, a API marca a comparação como `indisponivel` em vez de tratar o total zero como uma opção mais barata. O restante da análise e a estimativa internacional continuam disponíveis.
 

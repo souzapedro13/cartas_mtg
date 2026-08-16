@@ -3,7 +3,7 @@ import html as html_lib
 import json
 import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 import httpx
@@ -13,6 +13,7 @@ from app.services.mtggoldfish import USER_AGENT
 
 
 LIGAMAGIC_URL = "https://www.ligamagic.com.br/"
+SCRYFALL_URL = "https://api.scryfall.com/cards/named"
 CACHE_TTL_SEGUNDOS = 10 * 60
 INTERVALO_ENTRE_REQUISICOES = 1.0
 MAX_TENTATIVAS_RATE_LIMIT = 3
@@ -196,6 +197,39 @@ def parse_ligamagic_html(html: str, nome_consultado: str) -> ResultadoLigaMagic:
     )
 
 
+async def _completar_imagem_scryfall(
+    resultado: ResultadoLigaMagic, nome: str, client: httpx.AsyncClient
+) -> ResultadoLigaMagic:
+    try:
+        response = await client.get(
+            SCRYFALL_URL,
+            params={"exact": nome},
+            headers={"Accept": "application/json;q=0.9,*/*;q=0.8"},
+        )
+        response.raise_for_status()
+        dados = response.json()
+
+        imagens = dados.get("image_uris")
+        if not isinstance(imagens, dict):
+            faces = dados.get("card_faces")
+            if isinstance(faces, list) and faces and isinstance(faces[0], dict):
+                imagens = faces[0].get("image_uris")
+
+        imagem = imagens.get("normal") if isinstance(imagens, dict) else None
+        if not isinstance(imagem, str) or not imagem.startswith("https://"):
+            return resultado
+
+        nome_pt = dados.get("printed_name")
+        return replace(
+            resultado,
+            nome_en=str(dados.get("name") or resultado.nome_en),
+            nome_pt=str(nome_pt) if nome_pt else resultado.nome_pt,
+            imagem=imagem,
+        )
+    except (httpx.HTTPError, KeyError, TypeError, ValueError):
+        return resultado
+
+
 async def consultar_carta(
     nome: str, client: httpx.AsyncClient | None = None
 ) -> ResultadoLigaMagic:
@@ -244,10 +278,13 @@ async def consultar_carta(
             status="erro_consulta",
             detalhe=f"Não foi possível consultar ou interpretar a LigaMagic: {exc}",
         )
+    try:
+        if resultado.imagem is None:
+            assert client is not None
+            resultado = await _completar_imagem_scryfall(resultado, nome, client)
     finally:
         if owns_client:
             await client.aclose()
 
-    if resultado.status != "erro_consulta":
-        _cache[chave] = (agora, resultado)
+    _cache[chave] = (agora, resultado)
     return resultado
