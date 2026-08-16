@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+.venv/
+venv/
+env/
+.conda/
+
+.env
+.env.*
+!.env.example
+
+.vscode/
+.idea/
+
+*.log
+*.tmp
+*.temp
+*.html
+ligamagic_dados.txt
+*.key
+*.key.pub
+Deploy e Projeto Final.pdf
+Docker Desktop Installer.exe
+
+dist/
+build/
+outputs/
